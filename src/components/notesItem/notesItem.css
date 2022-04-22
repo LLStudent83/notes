@@ -1,0 +1,36 @@
+
+.notesItem__deleteItem {
+    border: none;
+    background-color: rgba(255,255,255,0);
+    position: absolute;
+    top: -13px;
+    right: -17px;
+}
+
+.highlight_off {
+    border-radius: 50%;
+    background-color: rgba(255,255,255,1);
+
+}
+
+.highlight_off:hover {
+    outline: 1px solid black;
+}
+ 
+.highlight_off:active {
+    background-color: gray;
+}
+
+.notesItem {
+    width: 250px;
+    position: relative;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* .notesItem:nth-child(n+2) {
+    margin-left: 10px;
+
+} */

@@ -1,10 +1,10 @@
 import React from 'react';
-import AppWorldClock from './components/appWorldClock/AppWorldClock';
+import NotesApp from './components/notesApp/NotesApp';
 import './App.css';
 
 function App() {
   return (
-    <AppWorldClock />
+    <NotesApp />
 
   );
 }
