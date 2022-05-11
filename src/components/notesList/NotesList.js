@@ -21,7 +21,7 @@ function NotesList({ notes, deleteItem }) {
 NotesList.propTypes = {
   notes: PropTypes.arrayOf(PropTypes.shape({
     content: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   })).isRequired,
   deleteItem: PropTypes.func.isRequired,
 };
