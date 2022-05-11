@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import NotesItem from '../notesItem/NotesItem';
@@ -20,7 +19,10 @@ function NotesList({ notes, deleteItem }) {
 }
 
 NotesList.propTypes = {
-  notes: PropTypes.array.isRequired,
+  notes: PropTypes.arrayOf(PropTypes.shape({
+    content: PropTypes.string,
+    id: PropTypes.string,
+  })).isRequired,
   deleteItem: PropTypes.func.isRequired,
 };
 

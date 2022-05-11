@@ -1,12 +1,10 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import NotesList from '../notesList/NotesList';
 import './notesApp.css';
 
 export default class NotesApp extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       noteText: '',
       notesListState: [],
@@ -22,7 +20,7 @@ export default class NotesApp extends React.Component {
   };
 
   updateNotesList = () => {
-    fetch(process.env.REACT_APP_BASE_URL)
+    fetch(`${process.env.REACT_APP_BASE_URL}/notes`)
       .then((response) => response.json())
       .then((notes) => {
         this.setState({ notesListState: notes });
@@ -35,14 +33,14 @@ export default class NotesApp extends React.Component {
     const noteObj = {
       content: noteText,
     };
-    fetch(process.env.REACT_APP_BASE_URL, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/notes`, {
       method: 'POST',
       body: JSON.stringify(noteObj),
     });
   };
 
   deleteItem = (id) => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/${id}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/notes/${id}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())
@@ -84,11 +82,9 @@ export default class NotesApp extends React.Component {
                 send
               </span>
             </button>
-
           </div>
         </footer>
       </div>
-
     );
   }
 }
