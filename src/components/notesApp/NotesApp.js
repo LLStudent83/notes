@@ -19,28 +19,32 @@ export default class NotesApp extends React.Component {
     this.setState({ noteText: target.value });
   };
 
-  updateNotesList = () => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/notes`)
+  updateNotesList = async () => {
+    fetch(`${process.env.REACT_APP_BASE_URL}/notes/`)
       .then((response) => response.json())
       .then((notes) => {
         this.setState({ notesListState: notes });
       });
   };
 
-  sendNote = () => {
+  sendNote = async () => {
     const { noteText } = this.state;
     if (noteText === '') return;
     const noteObj = {
       content: noteText,
     };
-    fetch(`${process.env.REACT_APP_BASE_URL}/notes`, {
+    const response = fetch(`${process.env.REACT_APP_BASE_URL}/notes/`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
       body: JSON.stringify(noteObj),
     });
+    return response;
   };
 
   deleteItem = (id) => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/notes/${id}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL}/notes/${id}/`, {
       method: 'DELETE',
     })
       .then((response) => response.json())
@@ -49,9 +53,15 @@ export default class NotesApp extends React.Component {
       });
   };
 
-  hendlSendNote = () => {
-    this.sendNote();
-    this.updateNotesList();
+  hendlSendNote = async () => {
+    const response = await this.sendNote();
+
+    if (response.ok) {
+      this.updateNotesList();
+    } else {
+      return new Error((response.statusText));
+    }
+
     this.setState({ noteText: '' });
   };
 
